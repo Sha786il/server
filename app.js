@@ -81,10 +81,36 @@ app.post('/addcourse',function(req,res){
 })
 
 
+app.put('/update/:id',function(req,res){
+    const id=req.params.id;
+    courseTitle=req.body.courseTitle;
+    courseDescription=req.body.courseDescription;
+    courseVenue=req.body.courseVenue;
+    courseDuration=req.body.courseDuration;
+    courseDate=req.body.courseDate;
+
+    CourseData.findByIdAndUpdate({"_id":id},
+    {$set:{"courseTitle":courseTitle,
+           "courseDescription":courseDescription,
+           "courseVenue":courseVenue,
+           "courseDuration":courseDuration,
+           "courseDate":courseDate
+
+}}).then(function(){res.send("Updated")});
+
+app.delete('/delete/:id',function(req,res){
+    const id=req.params.id;
+    CourseData.findByIdAndDelete(id,function(){
+        res.send("Deleted")})
+    })
 
 
 
 
 
-app.listen(3000);
+
+})
+
+
+app.listen(5000);
 
